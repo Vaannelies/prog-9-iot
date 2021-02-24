@@ -30,7 +30,19 @@ void loop() {
   
   // Constantly change enemy LED (random)
   e.x += (rand() %(1 + 1 - (-1))) + (-1);
+
+
+  // Check lightSensor for 'teleporting' enemy back to LED 9 if player is in trouble
+  Serial.println(analogRead(8));
+  if(analogRead(8) < 20) {
+    e.x = 9;
+  }
+  
   e.update();
+}
+
+void lightSensor() {
+  
 }
 
 void button_A() {

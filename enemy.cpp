@@ -9,7 +9,7 @@ void Enemy::update() {
 //  CircuitPlayground.clearPixels();
   x == 10 ? x = 0 : false;
   x == -1 ? x = 9 : false;
-  CircuitPlayground.setPixelColor(x,255,0,0);
+  CircuitPlayground.setPixelColor(x,100,0,0);
   delay(300);
 }
 

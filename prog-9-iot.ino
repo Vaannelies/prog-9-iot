@@ -9,22 +9,38 @@ void setup() {
 //   put your setup code here, to run once:
   Serial.begin(9600);
   CircuitPlayground.begin();
+  attachInterrupt(
+    digitalPinToInterrupt(4),
+    button_A,
+    RISING
+  );
+  attachInterrupt(
+    digitalPinToInterrupt(5),
+    button_B,
+    RISING
+  );
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // Turn off all LEDs
+  CircuitPlayground.clearPixels();
 
-  // Change enemy LED (random)
+  // Turn player LED back on
+  CircuitPlayground.setPixelColor(p.x,0,100,0);
+  
+  // Constantly change enemy LED (random)
   e.x += (rand() %(1 + 1 - (-1))) + (-1);
   e.update();
+}
 
-  // Check button for player
-  if(CircuitPlayground.leftButton() == true) {
-    Serial.println("left");
+void button_A() {
+  // Check button A whenever you want
     p.x++;
-  } else if(CircuitPlayground.rightButton() == true) {
+    p.update(p.x-1);
+}
+
+void button_B() {
+  // Check button B whenever you want
     p.x--;
-  }
-  p.update();
-  
+    p.update(p.x+1);
 }

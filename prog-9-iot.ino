@@ -41,10 +41,6 @@ void loop() {
   e.update();
 }
 
-void lightSensor() {
-  
-}
-
 void button_A() {
   // Check button A whenever you want
     p.x++;

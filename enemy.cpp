@@ -1,0 +1,18 @@
+#include "enemy.h"
+#include <Arduino.h>
+#include <Adafruit_CircuitPlayground.h>
+
+#define LED
+
+void Enemy::update() {
+  Serial.println("I am an enemy!");
+  CircuitPlayground.clearPixels();
+  x == 10 ? x = 0 : false;
+  x == -1 ? x = 9 : false;
+  CircuitPlayground.setPixelColor(x,255,0,0);
+  delay(300);
+}
+
+Enemy::Enemy() {
+
+}

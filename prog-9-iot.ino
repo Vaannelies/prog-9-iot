@@ -1,5 +1,5 @@
-#include "Enemy.h"
-#include "Player.h"
+#include "enemy.h"
+#include "player.h"
 #include <Adafruit_CircuitPlayground.h>
 int pixels = 10;
 boolean showingLives = false;
@@ -117,4 +117,4 @@ void checkLives() {
       e.x = 0;
       showingLives = false;
     }
-}
+};

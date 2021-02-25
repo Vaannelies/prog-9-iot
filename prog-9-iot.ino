@@ -1,6 +1,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include <Adafruit_CircuitPlayground.h>
+int pixels = 9;
 
 Enemy e = Enemy();
 Player p = Player();
@@ -33,22 +34,53 @@ void loop() {
 
 
   // Check lightSensor for 'teleporting' enemy back to LED 9 if player is in trouble
-  Serial.println(analogRead(8));
   if(analogRead(8) < 20) {
     e.x = 9;
   }
   
   e.update();
+
+  // Game
+  // check for collision 
+  checkLives();
+//  Serial.println("=========================");
+  
+//  Serial.println("=========================");
+
+
+  // game over if no lives
+  if(p.lives <= 0) {
+    Serial.println(p.lives);
+    //restart
+    for(int i = 0; i<pixels; i++) {
+      CircuitPlayground.setPixelColor(i, 75*p.lives,75*p.lives,75*p.lives);
+    }
+    delay(2000);
+    p = Player();
+    e = Enemy();
+  }
 }
 
 void button_A() {
   // Check button A whenever you want
-    p.x++;
-    p.update(p.x-1);
+    p.x--;
+    p.update(p.x+1);
+    checkLives();
 }
 
 void button_B() {
   // Check button B whenever you want
-    p.x--;
-    p.update(p.x+1);
+    p.x++;
+    p.update(p.x-1);
+    checkLives();
+}
+
+void checkLives() {
+    if(p.x == e.x) {
+      p.lives--;
+      for(int i = 0; i<pixels; i++) {
+        CircuitPlayground.setPixelColor(i, 75-25*p.lives, 0+25*p.lives, 0);
+      }
+      delay(2000);
+    }
 }

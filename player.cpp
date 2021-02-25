@@ -5,7 +5,7 @@
 #define LED
 
 void Player::update(int old) {
-  Serial.println("I am a player");
+//  Serial.println("I am a player");
   // Turn of previous LED
   CircuitPlayground.setPixelColor(old, 0,0,0);
 

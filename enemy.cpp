@@ -5,7 +5,7 @@
 #define LED
 
 void Enemy::update() {
-  Serial.println("I am an enemy!");
+//  Serial.println("I am an enemy!");
 //  CircuitPlayground.clearPixels();
   x == 10 ? x = 0 : false;
   x == -1 ? x = 9 : false;

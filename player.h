@@ -6,8 +6,6 @@ class Player: public Led {
 
   public:
     Player();
-//    int * lives = 3;
-//    int * x = 6;
     int lives = 3;
     int x = 6;
 

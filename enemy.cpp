@@ -5,6 +5,7 @@
 #define LED
 
 void Enemy::update() {
+  move();
   checkX();
   CircuitPlayground.setPixelColor(x,100,0,0);
   delay(300);

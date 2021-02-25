@@ -32,7 +32,7 @@ void loop() {
   CircuitPlayground.setPixelColor(p.x,0,100,0);
   
   // Constantly change enemy LED (random)
-  e.x += (rand() %(1 + 1 - (-1))) + (-1);
+//  e.x += (rand() %(1 + 1 - (-1))) + (-1);
 
 
   // Check lightSensor for 'teleporting' enemy back to LED 9 if player is in trouble
@@ -112,12 +112,11 @@ void checkLives() {
           CircuitPlayground.setPixelColor(0, 0,0,100);
           CircuitPlayground.setPixelColor(1, 0,0,100);
           break;
-        
+
+        case 0 :
+          break;        
       }
-      Serial.println("start of delay");
       delay(1000000);
-      Serial.println("end of delay, and now:");
-      Serial.println(showingLives);
       p.x = 6;
       e.x = 0;
       showingLives = false;

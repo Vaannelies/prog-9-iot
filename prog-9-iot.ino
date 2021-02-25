@@ -1,6 +1,7 @@
 #include "enemy.h"
 #include "player.h"
 #include "Led.h"
+#include <string>
 #include <Adafruit_CircuitPlayground.h>
 int pixels = 10;
 boolean showingLives = false;
@@ -31,21 +32,12 @@ void loop() {
   // Turn player LED back on
   CircuitPlayground.setPixelColor(p.x,0,100,0);
   
-  // Constantly change enemy LED (random)
-//  e.x += (rand() %(1 + 1 - (-1))) + (-1);
-
-
-  // Check lightSensor for 'teleporting' enemy back to LED 9 if player is in trouble
-  Serial.print("analogread: ");
-  Serial.println(analogRead(10));
-  if(analogRead(10) < 20) {
-    e.x = 9;
-  }
+  // check for collision 
+  checkLives(false);
+  Serial.println(p.x == e.x);
   
   e.update();
 
-  // check for collision 
-  checkLives();
 
   // game over if no lives
   if(p.lives <= 0) {
@@ -75,7 +67,7 @@ void button_A() {
     if(showingLives == false) {
       p.x--;
       p.update(p.x+1);
-      checkLives();  
+      checkLives(true);  
     };
 
 }
@@ -85,13 +77,15 @@ void button_B() {
     if(showingLives == false) {
       p.x++;
       p.update(p.x-1);
-      checkLives(); 
+      checkLives(true); 
     };
 }
 
-void checkLives() {
+void checkLives(boolean player) {
     if(p.x == e.x) {
       showingLives = true;
+      p.x = 6;
+      e.x = 0;
       Serial.println(showingLives);
       p.lives--;
       for(int i = 0; i<pixels; i++) {
@@ -116,9 +110,16 @@ void checkLives() {
         case 0 :
           break;        
       }
-      delay(1000000);
-      p.x = 6;
-      e.x = 0;
+      
+      if(player == true) {
+        delay(1000000);
+      } else {
+        delay(3000);
+      };
+      Serial.println("player  ");
+      Serial.print(p.x);
+      Serial.println("enemy  ");
+      Serial.print(e.x);
       showingLives = false;
     }
 };

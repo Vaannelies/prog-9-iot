@@ -1,6 +1,7 @@
 #include "enemy.h"
 #include "player.h"
 #include "Led.h"
+#include "YellowPoint.h"
 #include <string>
 #include <Adafruit_CircuitPlayground.h>
 int pixels = 10;
@@ -59,6 +60,12 @@ void loop() {
 
     delay(1000);
     showingLives = false;
+  }
+
+  // spawn yellow point
+  int randomYellow = rand() %0 + 100;  
+  if(randomYellow == 1) {
+    YellowPoint yp = YellowPoint();
   }
 }
 

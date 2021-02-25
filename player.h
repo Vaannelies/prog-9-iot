@@ -1,11 +1,13 @@
 #include <Arduino.h>
 #include "Led.h"
 
-class Player: public Led{
+class Player: public Led {
   private:
 
   public:
     Player();
+//    int * lives = 3;
+//    int * x = 6;
     int lives = 3;
     int x = 6;
 

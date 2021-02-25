@@ -1,5 +1,6 @@
 #include "enemy.h"
 #include "player.h"
+#include "Led.h"
 #include <Adafruit_CircuitPlayground.h>
 int pixels = 10;
 boolean showingLives = false;
@@ -35,7 +36,9 @@ void loop() {
 
 
   // Check lightSensor for 'teleporting' enemy back to LED 9 if player is in trouble
-  if(analogRead(8) < 20) {
+  Serial.print("analogread: ");
+  Serial.println(analogRead(10));
+  if(analogRead(10) < 20) {
     e.x = 9;
   }
   
@@ -62,7 +65,7 @@ void loop() {
     CircuitPlayground.setPixelColor(8, 0,0,100);
     CircuitPlayground.setPixelColor(9, 0,0,100);
 
-    delay(2000);
+    delay(1000);
     showingLives = false;
   }
 }
@@ -73,7 +76,7 @@ void button_A() {
       p.x--;
       p.update(p.x+1);
       checkLives();  
-    }
+    };
 
 }
 
@@ -83,8 +86,7 @@ void button_B() {
       p.x++;
       p.update(p.x-1);
       checkLives(); 
-    }
-
+    };
 }
 
 void checkLives() {
@@ -112,7 +114,10 @@ void checkLives() {
           break;
         
       }
-      delay(2000);
+      Serial.println("start of delay");
+      delay(1000000);
+      Serial.println("end of delay, and now:");
+      Serial.println(showingLives);
       p.x = 6;
       e.x = 0;
       showingLives = false;

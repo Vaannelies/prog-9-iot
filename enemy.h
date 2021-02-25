@@ -5,6 +5,7 @@ class Enemy: public Led {
   
   public:
     Enemy();
+//    int * x = 0;
     int x = 0;
     void checkX() {
         x == 10 ? x = 0 : false;

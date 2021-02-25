@@ -3,7 +3,7 @@ class Enemy {
   
   public:
     Enemy();
-    int x = -1;
+    int x = 0;
     
     void update();
 };

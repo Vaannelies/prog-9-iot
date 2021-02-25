@@ -4,9 +4,7 @@
 
 #define LED
 
-void Enemy::update() {
-//  Serial.println("I am an enemy!");
-//  CircuitPlayground.clearPixels();
+void Enemy::update() {;
   x == 10 ? x = 0 : false;
   x == -1 ? x = 9 : false;
   CircuitPlayground.setPixelColor(x,100,0,0);

@@ -15,5 +15,10 @@ class PinkPoint: public Point {
         x == -1 ? x = 9 : false;
     }
 
+    void collectPoint() {
+      Serial.print("hoi");
+    }
+
     void update();
+
 };

@@ -9,10 +9,12 @@ boolean showingLives = false;
 
 Enemy e = Enemy();
 Player p = Player();
+YellowPoint yp = YellowPoint();
 
 void setup() {
   Serial.begin(9600);
   CircuitPlayground.begin();
+  CircuitPlayground.setAccelRange(LIS3DH_RANGE_8_G);
   
   attachInterrupt(
     digitalPinToInterrupt(4),
@@ -32,12 +34,19 @@ void loop() {
 
   // Turn player LED back on
   CircuitPlayground.setPixelColor(p.x,0,100,0);
-  
+
+  // Turn yellowPoint LED back on
+    if(yp.active) {
+         CircuitPlayground.setPixelColor(yp.x,100,100,0);
+    }
+   
   // check for collision 
+  checkPointCollision();
   checkLives(false);
   Serial.println(p.x == e.x);
   
   e.update();
+  yp.update();
 
 
   // game over if no lives
@@ -62,11 +71,16 @@ void loop() {
     showingLives = false;
   }
 
-  // spawn yellow point
-  int randomYellow = rand() %0 + 100;  
-  if(randomYellow == 1) {
-    YellowPoint yp = YellowPoint();
+  if(!yp.active) {
+    //   spawn yellow point
+    int randomYellow = rand() % ((10 - 0) + 1) + 0;
+    Serial.println(randomYellow);
+    if(randomYellow == 5) {
+      yp.active = true;
+      yp.x = rand() % ((9 - 0) + 1) + 0;
+    }
   }
+
 }
 
 void button_A() {
@@ -130,3 +144,9 @@ void checkLives(boolean player) {
       showingLives = false;
     }
 };
+
+void checkPointCollision() {
+  if(p.x == yp.x) {
+    yp.collectPoint();
+  }
+}

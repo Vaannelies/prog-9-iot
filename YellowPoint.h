@@ -7,7 +7,7 @@ class YellowPoint: public Point {
 
   public:
     YellowPoint();
-    int x = 0;
+    int x = -1;
     boolean active = false;
     
     void playSong() {
@@ -19,6 +19,7 @@ class YellowPoint: public Point {
 
     void collectPoint() {
       active = false;
+      x = -1;
       playSong();
     }
 };

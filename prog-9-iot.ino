@@ -128,7 +128,7 @@ void checkLives(boolean player) {
       Serial.println(showingLives);
       p.lives--;
       for(int i = 0; i<pixels; i++) {
-        CircuitPlayground.setPixelColor(i, 75-(25*p.lives), 0+(25*p.lives), 0);
+        CircuitPlayground.setPixelColor(i, 100, 0, 0);
       }
 
       // Show amount of lives
@@ -147,6 +147,9 @@ void checkLives(boolean player) {
           break;
 
         case 0 :
+          for(int i = 0; i<pixels; i++) {
+            CircuitPlayground.setPixelColor(i, 100, 0, 0);
+          }
           break;        
       }
       

@@ -6,19 +6,19 @@ class PinkPoint: public Point {
 
   public:
     PinkPoint();
-    int lives = 3;
-    int x = 6;
+    int x = 0;
+    boolean active = false;
 
     void playSong() {
-        // Check if LED is between 0-9
-        x == 10 ? x = 0 : false;
-        x == -1 ? x = 9 : false;
+        Serial.print("lol");
+//        CircuitPlayground.playTone(800, 100);
     }
 
     void collectPoint() {
-      Serial.print("hoi");
+      active = false;
+      playSong();
     }
-
+    
     void update();
 
 };

@@ -2,6 +2,7 @@
 #include "player.h"
 #include "Led.h"
 #include "YellowPoint.h"
+#include "PinkPoint.h"
 #include <string>
 #include <Adafruit_CircuitPlayground.h>
 int pixels = 10;
@@ -10,6 +11,7 @@ boolean showingLives = false;
 Enemy e = Enemy();
 Player p = Player();
 YellowPoint yp = YellowPoint();
+PinkPoint pp = PinkPoint();
 
 void setup() {
   Serial.begin(9600);
@@ -39,6 +41,12 @@ void loop() {
     if(yp.active) {
          CircuitPlayground.setPixelColor(yp.x,100,100,0);
     }
+
+
+  // Turn pinkPoint LED back on
+    if(pp.active) {
+      CircuitPlayground.setPixelColor(pp.x,100,0,100);
+    }
    
   // check for collision 
   checkPointCollision();
@@ -47,7 +55,7 @@ void loop() {
   
   e.update();
   yp.update();
-
+  pp.update();
 
   // game over if no lives
   if(p.lives <= 0) {
@@ -73,11 +81,21 @@ void loop() {
 
   if(!yp.active) {
     //   spawn yellow point
-    int randomYellow = rand() % ((10 - 0) + 1) + 0;
-    Serial.println(randomYellow);
-    if(randomYellow == 5) {
+    int randomMoment = rand() % ((10 - 0) + 1) + 0;
+    Serial.println(randomMoment);
+    if(randomMoment == 5) {
       yp.active = true;
       yp.x = rand() % ((9 - 0) + 1) + 0;
+    }
+  }
+
+    if(!pp.active) {
+    //   spawn pink point
+    int randomMoment = rand() % ((50 - 0) + 1) + 0;
+    Serial.println(randomMoment);
+    if(randomMoment == 5) {
+      pp.active = true;
+      pp.x = rand() % ((9 - 0) + 1) + 0;
     }
   }
 
@@ -148,5 +166,7 @@ void checkLives(boolean player) {
 void checkPointCollision() {
   if(p.x == yp.x) {
     yp.collectPoint();
+  } else if (p.x == pp.x) {
+    pp.collectPoint();
   }
 }

@@ -9,11 +9,10 @@ class YellowPoint: public Point {
     YellowPoint();
     int x = 0;
     boolean active = false;
+    
     void playSong() {
-        // Check if LED is between 0-9
         Serial.print("lol");
 //        CircuitPlayground.playTone(800, 100);
-        
     }
 
     void update();

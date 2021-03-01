@@ -1,5 +1,5 @@
-#include "enemy.h"
-#include "player.h"
+#include "Enemy.h"
+#include "Player.h"
 #include "Led.h"
 #include "YellowPoint.h"
 #include "PinkPoint.h"

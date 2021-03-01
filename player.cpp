@@ -1,4 +1,4 @@
-#include "player.h"
+#include "Player.h"
 #include <Arduino.h>
 #include <Adafruit_CircuitPlayground.h>
 

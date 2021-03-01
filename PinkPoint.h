@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "point.h"
+#include "Point.h"
 #include <Adafruit_CircuitPlayground.h>
 
 class PinkPoint: public Point {

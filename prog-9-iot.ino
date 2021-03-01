@@ -8,7 +8,7 @@
 int pixels = 10;
 boolean showingLives = false;
 
-Enemy e = Enemy();
+Enemy e = Enemy(0);
 Player p = Player();
 YellowPoint yp = YellowPoint(-1, false);
 PinkPoint pp = PinkPoint(-1, false);
@@ -16,8 +16,7 @@ PinkPoint pp = PinkPoint(-1, false);
 void setup() {
   Serial.begin(9600);
   CircuitPlayground.begin();
-  CircuitPlayground.setAccelRange(LIS3DH_RANGE_8_G);
-  
+
   attachInterrupt(
     digitalPinToInterrupt(4),
     button_A,
@@ -51,7 +50,7 @@ void loop() {
   // check for collision 
   checkPointCollision();
   checkLives(false);
-  Serial.println(p.x == e.x);
+  Serial.println(p.x == e.gx);
   
   e.update();
   yp.update();
@@ -63,7 +62,7 @@ void loop() {
     
     //restart
     p = Player();
-    e = Enemy();
+    e = Enemy(0);
 
     // show that player has 3 lives
     CircuitPlayground.setPixelColor(0, 0,0,100);
@@ -121,10 +120,10 @@ void button_B() {
 }
 
 void checkLives(boolean player) {
-    if(p.x == e.x) {
+    if(p.x == e.gx) {
       showingLives = true;
       p.x = 6;
-      e.x = 0;
+      e.gx = 0;
       Serial.println(showingLives);
       p.lives--;
       for(int i = 0; i<pixels; i++) {
@@ -161,7 +160,7 @@ void checkLives(boolean player) {
       Serial.println("player  ");
       Serial.print(p.x);
       Serial.println("enemy  ");
-      Serial.print(e.x);
+      Serial.print(e.gx);
       showingLives = false;
     }
 };

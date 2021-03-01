@@ -6,20 +6,13 @@ class PinkPoint: public Point {
   private:
 
   public:
-    PinkPoint();
-    int x = -1;
-    boolean active = false;
+    PinkPoint(int x, boolean active);
+    int gx;
+    boolean gactive;
 
-    void playSong() {
-        Serial.print("lol");
-        CircuitPlayground.playTone(1800, 50);
-    }
+    void playSong();
 
-    void collectPoint() {
-      active = false;
-      x = -1;
-      playSong();
-    }
+    void collectPoint();
     
     void update();
 

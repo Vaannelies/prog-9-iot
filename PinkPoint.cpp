@@ -2,12 +2,25 @@
 #include <Arduino.h>
 #include <Adafruit_CircuitPlayground.h>
 
-void PinkPoint::update() {
-    if(active) {
-      CircuitPlayground.setPixelColor(x,100,0,100);
-    }
+PinkPoint::PinkPoint(int x, boolean active) {
+  gx = x;
+  gactive = active;
 }
 
-PinkPoint::PinkPoint() {
+void PinkPoint::playSong() {
+      Serial.print("lol");
+      CircuitPlayground.playTone(1800, 50);
+  };
+      
+void PinkPoint::collectPoint() {
+    gactive = false;
+    gx = -1;
+    playSong();
+  };
+   
 
+void PinkPoint::update() {
+    if(gactive) {
+      CircuitPlayground.setPixelColor(gx,100,0,100);
+    }
 }

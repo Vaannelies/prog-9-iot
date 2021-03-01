@@ -2,18 +2,13 @@
 #include "Led.h"
 
 class Player: public Led {
-  private:
 
   public:
-    Player();
-    int lives = 3;
-    int x = 6;
+    Player(int x, int lives);
+    int gx;
+    int glives;
 
-    void checkX() {
-        // Check if LED is between 0-9
-        x == 10 ? x = 0 : false;
-        x == -1 ? x = 9 : false;
-    }
+    void checkX();
 
     void update(int old);
 };

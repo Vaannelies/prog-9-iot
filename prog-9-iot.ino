@@ -9,7 +9,7 @@ int pixels = 10;
 boolean showingLives = false;
 
 Enemy e = Enemy(0);
-Player p = Player();
+Player p = Player(6,3);
 YellowPoint yp = YellowPoint(-1, false);
 PinkPoint pp = PinkPoint(-1, false);
 
@@ -34,7 +34,7 @@ void loop() {
   CircuitPlayground.clearPixels();
 
   // Turn player LED back on
-  CircuitPlayground.setPixelColor(p.x,0,100,0);
+  CircuitPlayground.setPixelColor(p.gx,0,100,0);
 
   // Turn yellowPoint LED back on
     if(yp.gactive) {
@@ -50,18 +50,18 @@ void loop() {
   // check for collision 
   checkPointCollision();
   checkLives(false);
-  Serial.println(p.x == e.gx);
+  Serial.println(p.gx == e.gx);
   
   e.update();
   yp.update();
   pp.update();
 
   // game over if no lives
-  if(p.lives <= 0) {
+  if(p.glives <= 0) {
     showingLives = true;
     
     //restart
-    p = Player();
+    p = Player(6,3);
     e = Enemy(0);
 
     // show that player has 3 lives
@@ -103,8 +103,8 @@ void loop() {
 void button_A() {
   // Check button A whenever you want (but not if showingLives is true, so you can't move the player)
     if(showingLives == false) {
-      p.x--;
-      p.update(p.x+1);
+      p.gx--;
+      p.update(p.gx+1);
       checkLives(true);  
     };
 
@@ -113,25 +113,25 @@ void button_A() {
 void button_B() {
   // Check button B whenever you want (but not if showingLives is true, so you can't move the player)
     if(showingLives == false) {
-      p.x++;
-      p.update(p.x-1);
+      p.gx++;
+      p.update(p.gx-1);
       checkLives(true); 
     };
 }
 
 void checkLives(boolean player) {
-    if(p.x == e.gx) {
+    if(p.gx == e.gx) {
       showingLives = true;
-      p.x = 6;
+      p.gx = 6;
       e.gx = 0;
       Serial.println(showingLives);
-      p.lives--;
+      p.glives--;
       for(int i = 0; i<pixels; i++) {
         CircuitPlayground.setPixelColor(i, 100, 0, 0);
       }
 
       // Show amount of lives
-      switch(p.lives) {        
+      switch(p.glives) {        
         case 2 :
           CircuitPlayground.setPixelColor(0, 0,0,100);
           CircuitPlayground.setPixelColor(1, 0,0,100);
@@ -158,7 +158,7 @@ void checkLives(boolean player) {
         delay(3000);
       };
       Serial.println("player  ");
-      Serial.print(p.x);
+      Serial.print(p.gx);
       Serial.println("enemy  ");
       Serial.print(e.gx);
       showingLives = false;
@@ -166,9 +166,9 @@ void checkLives(boolean player) {
 };
 
 void checkPointCollision() {
-  if(p.x == yp.gx) {
+  if(p.gx == yp.gx) {
     yp.collectPoint();
-  } else if (p.x == pp.gx) {
+  } else if (p.gx == pp.gx) {
     pp.collectPoint();
   }
 }

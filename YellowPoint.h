@@ -3,23 +3,16 @@
 #include <Adafruit_CircuitPlayground.h>
 
 class YellowPoint: public Point {
-  private:
-
   public:
-    YellowPoint();
-    int x = -1;
-    boolean active = false;
+    YellowPoint(int x, boolean active);
+    int gx;
+    boolean gactive;
     
-    void playSong() {
-        Serial.print("lol");
-//        CircuitPlayground.playTone(800, 100);
-    }
-
+    void playSong();
+    
+    void collectPoint();
+    
     void update();
 
-    void collectPoint() {
-      active = false;
-      x = -1;
-      playSong();
-    }
+
 };

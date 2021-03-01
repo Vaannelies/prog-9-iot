@@ -2,9 +2,6 @@
 #include <Arduino.h>
 #include <Adafruit_CircuitPlayground.h>
 
-#define LED
-
-
   
 void Enemy::update() {
   

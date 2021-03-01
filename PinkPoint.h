@@ -3,8 +3,6 @@
 #include <Adafruit_CircuitPlayground.h>
 
 class PinkPoint: public Point {
-  private:
-
   public:
     PinkPoint(int x, boolean active);
     int gx;
@@ -15,5 +13,4 @@ class PinkPoint: public Point {
     void collectPoint();
     
     void update();
-
 };

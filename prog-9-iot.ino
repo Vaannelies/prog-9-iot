@@ -10,7 +10,7 @@ boolean showingLives = false;
 
 Enemy e = Enemy();
 Player p = Player();
-YellowPoint yp = YellowPoint();
+YellowPoint yp = YellowPoint(-1, false);
 PinkPoint pp = PinkPoint(-1, false);
 
 void setup() {
@@ -38,8 +38,8 @@ void loop() {
   CircuitPlayground.setPixelColor(p.x,0,100,0);
 
   // Turn yellowPoint LED back on
-    if(yp.active) {
-         CircuitPlayground.setPixelColor(yp.x,100,100,0);
+    if(yp.gactive) {
+         CircuitPlayground.setPixelColor(yp.gx,100,100,0);
     }
 
 
@@ -79,13 +79,13 @@ void loop() {
     showingLives = false;
   }
 
-  if(!yp.active) {
+  if(!yp.gactive) {
     //   spawn yellow point
     int randomMoment = rand() % ((10 - 0) + 1) + 0;
     Serial.println(randomMoment);
     if(randomMoment == 5) {
-      yp.active = true;
-      yp.x = rand() % ((9 - 0) + 1) + 0;
+      yp.gactive = true;
+      yp.gx = rand() % ((9 - 0) + 1) + 0;
     }
   }
 
@@ -167,7 +167,7 @@ void checkLives(boolean player) {
 };
 
 void checkPointCollision() {
-  if(p.x == yp.x) {
+  if(p.x == yp.gx) {
     yp.collectPoint();
   } else if (p.x == pp.gx) {
     pp.collectPoint();

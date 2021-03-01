@@ -8,7 +8,6 @@ PinkPoint::PinkPoint(int x, boolean active) {
 }
 
 void PinkPoint::playSong() {
-      Serial.print("lol");
       CircuitPlayground.playTone(1800, 50);
   };
       

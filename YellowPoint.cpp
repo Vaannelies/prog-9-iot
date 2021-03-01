@@ -2,12 +2,23 @@
 #include <Arduino.h>
 #include <Adafruit_CircuitPlayground.h>
 
-void YellowPoint::update() {
-  if(active) {
-    CircuitPlayground.setPixelColor(x,100,100,0);
-  }
+YellowPoint::YellowPoint(int x, boolean active) {
+    gx = x;
+    gactive = active;
 }
 
-YellowPoint::YellowPoint() {
+void YellowPoint::playSong(){
+        CircuitPlayground.playTone(800, 50);
+}
 
+void YellowPoint::collectPoint() {
+      gactive = false;
+      gx = -1;
+      playSong();
+}
+
+void YellowPoint::update() {
+  if(gactive) {
+    CircuitPlayground.setPixelColor(gx,100,100,0);
+  }
 }
